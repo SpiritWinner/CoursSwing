@@ -1,4 +1,6 @@
 public class Book {
+    private final static String BOOK_FORMAT_STRING = "%10d | %10s | %10s | %8d |";
+
     private int bookNum;
     private String vendorCode;
     private String month;
@@ -52,13 +54,15 @@ public class Book {
 
     @Override
     public boolean equals(Object ob) {
-        if (ob != this) {
-            if (ob == null || getClass() != ob.getClass()) return false;
-            Book book = (Book) ob;
-            return (bookNum == book.bookNum && vendorCode.equals(book.vendorCode)
-                    && month.equals(book.month) && copyCount == book.copyCount);
-        } else {
-            return true;
-        }
+        if (ob == this) return true;
+        if (ob == null) return false;
+        if (getClass() != ob.getClass()) return false;
+        Book book = (Book) ob;
+        return (bookNum == book.bookNum);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(BOOK_FORMAT_STRING, bookNum, vendorCode, month, copyCount);
     }
 }
